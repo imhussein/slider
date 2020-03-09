@@ -1,0 +1,5 @@
+<div class="slider__list" #list>
+  <div class="slider__items">
+    <app-slide-item *ngFor="let slide of slidesData; let i = index" [slide]="slide" [index]="i"></app-slide-item>
+  </div>
+</div>

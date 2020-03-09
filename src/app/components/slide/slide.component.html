@@ -1,0 +1,8 @@
+<div class="slider__main">
+  <div class="slider__arrow slider__arrow-right"></div>
+  <div class="slider__arrow slider__arrow-left"></div>
+  <div class="slider__slides" #slides>
+    <app-slide-content *ngFor="let slide of slidesData; let i = index" [index]="i" [slide]="slide">
+    </app-slide-content>
+  </div>
+</div>
