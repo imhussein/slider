@@ -16,7 +16,7 @@ export class SlideComponent implements AfterViewInit, OnInit {
   // PROPS
   @ViewChild("slides", { static: false }) slides: ElementRef;
   slidesData: SlidesData[] = [];
-  slideTimeout: number = 9000;
+  slideTimeout: number = 6000;
   slidesList: HTMLElement[];
   i: number = 0;
   r: number = 27;
@@ -80,8 +80,12 @@ export class SlideComponent implements AfterViewInit, OnInit {
         }
       );
 
+      let slides = this._appService.getSlideData();
+
       // Add Active Class To Current Pagination Based On Current Slide
-      this.pagination.nativeElement.children[res].classList.add("active");
+      this.pagination.nativeElement.children[
+        res >= slides.length - 1 ? slides.length - 1 : res
+      ].classList.add("active");
     });
   }
 
@@ -101,15 +105,15 @@ export class SlideComponent implements AfterViewInit, OnInit {
   // Previous Slide
   prevSlide() {
     this.i <= 0 ? (this.i = this.slidesData.length - 1) : (this.i -= 1);
-    this.slide(this.i);
     this._appService.changeSlide(this.i);
+    this.slide(this.i);
   }
 
   // Next Slide
   nextSlide() {
-    this.i === this.slidesData.length - 1 ? (this.i = 0) : (this.i += 1);
-    this.slide(this.i);
+    this.i >= this.slidesData.length - 1 ? (this.i = 0) : (this.i += 1);
     this._appService.changeSlide(this.i);
+    this.slide(this.i);
   }
 
   // Animate SVG Controlls
@@ -135,7 +139,8 @@ export class SlideComponent implements AfterViewInit, OnInit {
     // Start In Micro Task Queue After DOM INIT Slides
     Promise.resolve()
       .then(() => {
-        this.slide(index);
+        const slides = this._appService.getSlideData().length - 1;
+        this.slide(index >= slides ? slides : index);
         if (this.i >= this.slides.nativeElement.children.length - 1) {
           this.i = -1;
         }

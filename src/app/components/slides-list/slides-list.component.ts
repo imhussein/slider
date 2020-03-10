@@ -46,16 +46,17 @@ export class SlidesListComponent implements OnInit {
         this.list.nativeElement.children[0]["children"];
 
       // Reset Active Class
-      const elements = [];
       [...element].forEach((element: HTMLElement, index: number) => {
         element.children[0].classList.remove("active");
       });
 
       // Add Class Active
       this.list.nativeElement.children &&
-        this.list.nativeElement.children[0]["children"][index][
-          "children"
-        ][0].classList.add("active");
+        this.list.nativeElement.children[0]["children"][
+          index >= this.slidesData.length - 1
+            ? this.slidesData.length - 1
+            : index
+        ]["children"][0].classList.add("active");
     });
   }
 }
