@@ -7,6 +7,7 @@ import { AppService } from "../services/app.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { SlideContent } from "../components/slide-content/slide-content.component";
 
+// Slider Module
 @NgModule({
   declarations: [
     SliderComponent,

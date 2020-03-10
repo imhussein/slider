@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { SlidesData } from "../@types/interfaces";
 import { ReplaySubject } from "rxjs";
 
+// App Service
 @Injectable({
   providedIn: "root"
 })
@@ -10,6 +11,7 @@ export class AppService {
   private currentSlide: ReplaySubject<number> = new ReplaySubject<any>();
 
   constructor() {
+    // Slider Data
     this.slidesData = [
       {
         image:
@@ -45,14 +47,17 @@ export class AppService {
     ];
   }
 
+  // Get Slides
   getSlideData() {
     return this.slidesData;
   }
 
+  // Push To The Reative Subject
   changeSlide(index: number) {
     this.currentSlide.next(index);
   }
 
+  // Get Slides AS Observable
   getCurrentSlide() {
     return this.currentSlide.asObservable();
   }

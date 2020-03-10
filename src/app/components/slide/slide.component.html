@@ -1,8 +1,28 @@
 <div class="slider__main">
-  <div class="slider__arrow slider__arrow-right"></div>
-  <div class="slider__arrow slider__arrow-left"></div>
+  <div class="slider__controls" #controls>
+    <div class="slider__arrow slider__arrow-left">
+      <svg width="80" height="80" (click)="prevSlide($event)">
+        <circle stroke="white" r="27" cx="40" attr.stroke-dasharray="{{PI}}" attr.stroke-dashoffset="{{0}}" cy="40"
+          stroke-width="1.6" fill="transparent" transform="rotate(-180 40 40)">
+        </circle>
+      </svg>
+      <span></span>
+    </div>
+    <div class="slider__arrow slider__arrow-right">
+      <svg width="80" height="80" (click)="nextSlide($event)">
+        <circle stroke="white" r="27" cx="40" cy="40" stroke-width="1.6" attr.stroke-dasharray="{{PI}}"
+          attr.stroke-dashoffset="{{0}}" fill="transparent">
+        </circle>
+      </svg>
+      <span></span>
+    </div>
+  </div>
+  <ul class="slider__pagination" #pagination>
+    <li *ngFor="let slide of slidesData;let i = index" [ngClass]="{active: !i}" class="slider__pagination-item"
+      (click)="onPaginationClick(i, $event)"></li>
+  </ul>
   <div class="slider__slides" #slides>
-    <app-slide-content *ngFor="let slide of slidesData; let i = index" [index]="i" [slide]="slide">
+    <app-slide-content *ngFor="let slide of slidesData; let i = index" stroke-dasharray="" [index]="i" [slide]="slide">
     </app-slide-content>
   </div>
 </div>

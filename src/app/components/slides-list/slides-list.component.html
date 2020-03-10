@@ -1,5 +1,7 @@
 <div class="slider__list" #list>
   <div class="slider__items">
-    <app-slide-item *ngFor="let slide of slidesData; let i = index" [slide]="slide" [index]="i"></app-slide-item>
+    <app-slide-item *ngFor="let slide of slidesData; let i = index"
+      [ngStyle]="{height: 100 / 5 + '%', top: i * (100 / 5) + '%'}" [slide]="slide" [index]="i">
+    </app-slide-item>
   </div>
 </div>
