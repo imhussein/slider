@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { SlidesData } from "src/app/@types/interfaces";
+import { AppService } from "src/app/services/app.service";
 
 @Component({
   selector: "app-slide-item",
@@ -11,7 +12,7 @@ export class SlideItemComponent {
   @Input("index") index: number;
   itemHeight: number;
 
-  constructor() {
+  constructor(public _appService: AppService) {
     this.itemHeight = 100 / 4;
   }
 }
